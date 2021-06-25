@@ -1,0 +1,37 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+#btn-array {
+	display: flex;
+	justify-content: flex-start;
+}
+
+#digits-container {
+	display: grid;
+	grid-template-areas:
+			"7 8 9"
+			"4 5 6"
+			"1 2 3"
+			"0 0 0";
+	height: 400px;
+	width: 400px;
+}
+
+#operations-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	height: 400px;
+	width: 100px;
+}
+
+.btn {
+	font-size: 50px;
+	line-height: 50px;
+	padding-top: 20px;
+	text-align: center;
+	background: red;
+}
