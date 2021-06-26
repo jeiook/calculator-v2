@@ -5,12 +5,20 @@
 }
 
 #screen {
-	width: 400px;
-	height: 100px;
+	display: grid;
+	grid-template-areas: 
+		"a b"
+		". c";
+	width: 600px;
+	height: 200px;
 	background: lightblue;
 	text-align: right;
 	font-size: 50px;
 	padding-top: 20px;
+}
+
+#curr-op {
+	grid-area: c;
 }
 
 #btn-elements {

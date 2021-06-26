@@ -18,14 +18,21 @@ function operate(op, x, y) {
 	return op(x, y);
 }
 
-function updateScreen(val, el) {
-	el.textContent = val;
+function updateScreen(screenVal, firstVal, op, screen) {
+	screenVal = String(Math.round(Number(screenVal) * 1000000) / 1000000);
+	if (firstVal) {
+		firstVal = String(Math.round(Number(firstVal) * 1000000) / 1000000);
+	}
+	screen.querySelector("#screen-val").textContent = screenVal;
+	screen.querySelector("#curr-op").textContent = op;
+	screen.querySelector("#first-val").textContent = firstVal;
 }
 
 function main() {
-	let screenVal = "";
+	let screenVal = "0";
 	let firstVal = "";
 	let currentOp = null;
+	let currentOpStr = "";
 	const ops = {"add": add, "sub": subtract, "mul": multiply, "div": divide};
 	const screen = document.getElementById("screen");
 	const digBtns = document.getElementById("digs-container").childNodes;
@@ -35,30 +42,37 @@ function main() {
 	digBtns.forEach(e => {
 		e.addEventListener("click", () => {
 			screenVal = String(Number(screenVal + e.getAttribute('id')));
-			updateScreen(screenVal, screen);
+			updateScreen(screenVal, firstVal, currentOpStr, screen);
 		});
 	});
 	opBtns.forEach(e => {
 		e.addEventListener("click", () => {
 			if (!currentOp) {
 				firstVal = screenVal;
-				screenVal = "";
-				updateScreen(screenVal, screen);
+				screenVal = "0";
 			}
-			currentOp = ops[e.getAttribute('id')];
+			currentOpStr = e.getAttribute('id');
+			currentOp = ops[currentOpStr];
+			updateScreen(screenVal, firstVal, currentOpStr, screen);
 		});
 	});
 	eqBtn.addEventListener("click", () => {
-		screenVal = operate(currentOp, Number(firstVal), Number(screenVal));
-		currentOp = null;
-		updateScreen(screenVal, screen);
+		if (currentOp && firstVal && screenVal) {
+			screenVal = operate(currentOp, Number(firstVal), Number(screenVal));
+			currentOp = null;
+			currentOpStr = "";
+			firstVal = "";
+			updateScreen(screenVal, firstVal, currentOpStr, screen);
+		}
 	});
 	clearBtn.addEventListener("click", () => {
-		screenVal = "";
+		screenVal = "0";
 		firstVal = "";
 		currentOp = null;
-		updateScreen(screenVal, screen);
+		currentOpStr = "";
+		updateScreen(screenVal, firstVal, currentOpStr, screen);
 	});
+	updateScreen(screenVal, firstVal, currentOpStr, screen);
 }
 
 main();
