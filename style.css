@@ -4,26 +4,41 @@
 	box-sizing: border-box;
 }
 
-#btns-container {
-	display: grid;
-	grid-template-areas:
-			"7 8 9 a"
-			"4 5 6 b"
-			"1 2 3 c"
-			"0 d d e";
-	grid-gap: 1px;
-	height: 400px;
+#screen {
 	width: 400px;
+	height: 100px;
+	background: lightblue;
+	text-align: right;
+	font-size: 50px;
+	padding-top: 20px;
 }
 
-#equals {
-	grid-area: d;
+#btn-elements {
+	display: flex;
+	width: 100vw;
+	justify-content: flex-start;
+}
+
+#digs-container {
+	display: grid;
+	grid-template-areas:
+			"7 8 9"
+			"4 5 6"
+			"1 2 3"
+			"0 0 0";
+	grid-gap: 1px;
+	height: 300px;
+	width: 300px;
+}
+
+#ops-container {
+	display: grid;
 }
 
 .btn {
 	font-size: 50px;
 	line-height: 50px;
-	padding-top: 20px;
 	text-align: center;
 	background: red;
+	min-width: 100px;
 }
