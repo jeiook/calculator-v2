@@ -11,6 +11,10 @@ function multiply(x, y) {
 }
 
 function divide(x, y) {
+	if (y == 0) {
+		alert("Division by 0 is invalid");
+		return 0;
+	}
 	return x / y;
 }
 
